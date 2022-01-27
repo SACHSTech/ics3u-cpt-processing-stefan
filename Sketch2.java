@@ -1,36 +1,77 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch2 extends PApplet {
-	
-	
-  /**
-   * Called once at the beginning of execution, put your size all in this method
-   */
-  public void settings() {
-	// put your size call here
-    size(400, 400);
-  }
 
   /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
-  public void setup() {
-    background(210, 255, 173);
+  * Menu design
+  * @author John. M
+  */
+
+  // setting image variables
+  PImage background;
+  PImage play; 
+  PImage quit;
+  PImage spaceinvasion;
+  PImage credits;
+ 
+
+  // rectangle variables
+  public boolean onPlay = false;
+  public boolean onExit = false;
+  
+  
+  public void settings() {
+    size(600, 600);
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
+  public void setup(){
+    // loading and resizing images
+    background = loadImage("../assets/background.jpg");
+    background.resize(600, 600);
+    play = loadImage("../assets/playbutton.png");
+    play.resize(75, 75);
+    quit = loadImage("../assets/powerbutton.png");
+    quit.resize(75, 75);
+    spaceinvasion = loadImage("../assets/spaceinvasion.png");
+    spaceinvasion.resize(200, 150);
+    credits = loadImage("../assets/credits.png");
+    credits.resize(500, 25);
   }
   
-  // define other methods down here.
+  public void draw() {  
+    
+    // Background and credits 
+    image(background, 0, 0);
+    image(credits, 5, 550);
+    
+    // Play button
+    fill(255, 255, 255);
+    rect(325,150,200,100); 
+    image(play, 390, 165);
+
+    // Game title
+    fill(255, 255, 255);
+    ellipse(100,100,350,350);
+    image(spaceinvasion, 25, 50);
+
+    // Exit button
+    fill(255, 255, 255);
+    rect(325,300,200,100);
+    image(quit, 387, 313);  
+  }
+
+  public void mousePressed() {
+    
+    // play button press
+    if ((mouseX >= 325 && mouseX <= 525) && (mouseY >= 150 && mouseY <= 250)){
+      onPlay = true;
+    }
+    
+    // exit button press
+    if ((mouseX >= 325 && mouseX <= 525) && (mouseY >= 300 && mouseY <= 400)){
+      exit();
+
+    }   
+  }
 }
